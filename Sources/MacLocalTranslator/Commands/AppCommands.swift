@@ -105,7 +105,7 @@ struct AppCommands: Commands {
     /// Copie la transcription de la conversation dans le presse-papiers
     private func copyTranscription() {
         let transcription = appState.conversationMessages
-            .map { "\($0.fromSource ? "\u2192" : "\u2190") \($0.original)" }
+            .map { "\($0.fromSource ? "\u{2192}" : "\u{2190}") \($0.original)" }
             .joined(separator: "\n\n")
         
         NSPasteboard.general.clearContents()
@@ -115,7 +115,7 @@ struct AppCommands: Commands {
     /// Copie la traduction de la conversation dans le presse-papiers
     private func copyTranslation() {
         let translation = appState.conversationMessages
-            .map { "\($0.fromSource ? "\u2192" : "\u2190") \($0.translated)" }
+            .map { "\($0.fromSource ? "\u{2192}" : "\u{2190}") \($0.translated)" }
             .joined(separator: "\n\n")
         
         NSPasteboard.general.clearContents()
