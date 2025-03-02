@@ -15,22 +15,20 @@ let package = Package(
         ),
     ],
     dependencies: [
-        // Dépendance pour Whisper.cpp (reconnaissance vocale)
-        .package(url: "https://github.com/ggerganov/whisper.cpp", from: "1.0.0"),
-        
-        // Dépendance pour l'interface utilisateur
+        // Only keep swift-algorithms as it's fetching correctly
         .package(url: "https://github.com/apple/swift-algorithms", from: "1.0.0"),
         
-        // Dépendance pour la traduction (LibreTranslate API client)
-        .package(url: "https://github.com/LibreTranslate/swift-libre-translate", from: "1.0.0"),
+        // Remove problematic dependencies:
+        // - whisper.cpp
+        // - swift-libre-translate
     ],
     targets: [
         .executableTarget(
             name: "MacLocalTranslator",
             dependencies: [
-                .product(name: "whisper", package: "whisper.cpp"),
                 .product(name: "Algorithms", package: "swift-algorithms"),
-                .product(name: "LibreTranslate", package: "swift-libre-translate"),
+                // Remove references to external dependencies
+                // Replace with stub implementations
             ],
             path: "Sources"
         ),
