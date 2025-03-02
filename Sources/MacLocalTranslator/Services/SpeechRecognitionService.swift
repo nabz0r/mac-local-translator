@@ -2,7 +2,7 @@
 //  SpeechRecognitionService.swift
 //  MacLocalTranslator
 //
-//  Service responsable de la reconnaissance vocale via Whisper.cpp
+//  Service responsable de la reconnaissance vocale via Whisper stub
 //
 
 import Foundation
@@ -48,6 +48,9 @@ class SpeechRecognitionService: ObservableObject {
     /// Gestionnaire des modèles
     private var modelManager: ModelManager
     
+    /// Modèle Whisper (stub)
+    private var whisperModel: WhisperModel?
+    
     /// Buffer audio accumulant les données pendant l'enregistrement
     private var audioBuffer: AVAudioPCMBuffer?
     
@@ -67,6 +70,9 @@ class SpeechRecognitionService: ObservableObject {
         self.modelManager = modelManager
         
         setupNotifications()
+        
+        // Initialiser le modèle Whisper (stub)
+        self.whisperModel = WhisperModel()
     }
     
     // MARK: - Configuration
@@ -78,7 +84,6 @@ class SpeechRecognitionService: ObservableObject {
             return
         }
         
-        // Dans une implémentation réelle, on initialiserait ici le modèle Whisper.cpp
         state = .initializing
         
         // Simulation d'initialisation du modèle
@@ -136,7 +141,7 @@ class SpeechRecognitionService: ObservableObject {
     
     /// Effectue la reconnaissance vocale sur l'audio enregistré
     private func performRecognition() {
-        guard let audioBuffer = audioBuffer else { return }
+        guard let _ = audioBuffer else { return }
         
         state = .recognizing
         
@@ -148,9 +153,12 @@ class SpeechRecognitionService: ObservableObject {
             // Simulation d'un délai de traitement
             Thread.sleep(forTimeInterval: 1.0)
             
+            // Utiliser le modèle stub pour générer une transcription
+            let transcribedText = self?.whisperModel?.transcribe(Data()) ?? "Bonjour"
+            
             // Création d'un résultat simulé
             let simulatedResult = RecognitionResult(
-                text: "Bonjour, comment puis-je vous aider aujourd'hui ?",
+                text: transcribedText,
                 language: .french,
                 confidence: 0.92,
                 duration: 2.5

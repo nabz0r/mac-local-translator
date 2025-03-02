@@ -41,6 +41,9 @@ class TranslationService: ObservableObject {
     /// Gestionnaire des modèles
     private var modelManager: ModelManager
     
+    /// Modèles de traduction (stubs)
+    private var translationModels: [String: LibreTranslateModel] = [:]
+    
     /// Queue de traitement pour la traduction
     private let processingQueue = DispatchQueue(label: "com.maclocaltranslator.translation", qos: .userInitiated)
     
@@ -48,6 +51,14 @@ class TranslationService: ObservableObject {
     
     init(modelManager: ModelManager) {
         self.modelManager = modelManager
+        
+        // Initialiser les modèles de traduction (stubs)
+        self.translationModels = [
+            "fr-en": LibreTranslateModel(source: "fr", target: "en"),
+            "en-fr": LibreTranslateModel(source: "en", target: "fr"),
+            "en-es": LibreTranslateModel(source: "en", target: "es"),
+            "es-en": LibreTranslateModel(source: "es", target: "en")
+        ]
     }
     
     // MARK: - Méthodes publiques
@@ -75,25 +86,23 @@ class TranslationService: ObservableObject {
             return .success(result)
         }
         
-        // Vérification du modèle de traduction
-        guard let model = modelManager.selectedTranslationModel, model.type == .translation else {
-            let error = NSError(domain: "Translation", code: 2, userInfo: [NSLocalizedDescriptionKey: "Modèle de traduction non disponible"])
-            await updateState(.failed(error))
-            return .failure(error)
-        }
-        
         // Mise à jour de l'état
         await updateState(.translating)
         
         do {
-            // Dans une implémentation réelle, on utiliserait le modèle de traduction
-            // Pour cette version prototype, on simule une traduction
-            
-            // Simulation d'un délai de traitement
+            // Délai simulé pour le traitement
             try await Task.sleep(nanoseconds: 800_000_000)  // 0.8 seconde
             
-            // Génération d'une traduction simulée
-            let translatedText = generateSimulatedTranslation(text, from: sourceLanguage, to: targetLanguage)
+            // Trouver le modèle de traduction approprié
+            let modelKey = "\(sourceLanguage.rawValue)-\(targetLanguage.rawValue)"
+            let translatedText: String
+            
+            if let model = translationModels[modelKey] {
+                translatedText = model.translate(text)
+            } else {
+                // Utiliser notre générateur de traduction simulée si pas de modèle disponible
+                translatedText = generateSimulatedTranslation(text, from: sourceLanguage, to: targetLanguage)
+            }
             
             // Création du résultat
             let result = TranslationResult(
