@@ -91,7 +91,7 @@ class Logger {
     }
     
     /// Journalise un message au niveau ERROR
-    static func error(_ message: String, category: Category, file: String = #file, function: String = #function, line: Int = #line) {
+    static func logError(_ message: String, category: Category, file: String = #file, function: String = #function, line: Int = #line) {
         log(message, level: .error, category: category, file: file, function: function, line: line)
     }
     
@@ -209,7 +209,7 @@ extension Logger {
         do {
             try block()
         } catch {
-            error("Exception: \(error.localizedDescription)", category: category, file: file, function: function, line: line)
+            logError("Exception: \(error.localizedDescription)", category: category, file: file, function: function, line: line)
             throw error
         }
         
@@ -225,7 +225,7 @@ extension Logger {
         do {
             try await block()
         } catch {
-            error("Exception: \(error.localizedDescription)", category: category, file: file, function: function, line: line)
+            logError("Exception: \(error.localizedDescription)", category: category, file: file, function: function, line: line)
             throw error
         }
         
