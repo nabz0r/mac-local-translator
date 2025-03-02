@@ -1,110 +1,110 @@
-# Guide de compilation et création du DMG pour Mac Local Translator
+# Mac Local Translator Compilation and DMG Creation Guide
 
-Ce guide explique comment compiler l'application et créer un fichier DMG pour la distribution.
+This guide explains how to compile the application and create a DMG file for distribution.
 
-## Modifications apportées
+## Changes made
 
-Des modifications ont été apportées au projet pour faciliter la compilation sans dépendances externes :
+Changes were made to the project to make it easier to compile without external dependencies:
 
-1. Les dépendances problématiques ont été retirées du fichier `Package.swift`
-2. Des implémentations de substitution (stubs) ont été créées pour :
-   - Whisper.cpp (reconnaissance vocale)
-   - LibreTranslate (traduction)
-3. Un Makefile simplifié a été ajouté pour faciliter la compilation et la création du DMG
+1. Removed problematic dependencies from the `Package.swift` file
+2. Created stub implementations for:
+- Whisper.cpp (speech recognition)
+- LibreTranslate (translation)
+3. Added a simplified Makefile to make it easier to compile and create the DMG
 
-## 1. Compilation du projet
+## 1. Compiling the project
 
-### Prérequis
+### Requirements
 
-- macOS 12.0 ou supérieur
-- Xcode 14.0 ou supérieur avec les outils en ligne de commande installés
-- Swift 5.7 ou supérieur
+- macOS 12.0 or later
+- Xcode 14.0 or later with command line tools installed
+- Swift 5.7 or later
 
-### Étapes
+### Steps
 
-1. Clonez le dépôt :
-   ```bash
-   git clone https://github.com/nabz0r/mac-local-translator.git
-   cd mac-local-translator
-   ```
+1. Clone the repository:
+```bash
+git clone https://github.com/nabz0r/mac-local-translator.git
+cd mac-local-translator
+```
 
-2. Compilation en mode debug :
-   ```bash
-   make -f Makefile.simple build
-   ```
+2. Compiling in debug mode:
+```bash
+make -f Makefile.simple build
+```
 
-3. Compilation en mode release :
-   ```bash
-   make -f Makefile.simple release
-   ```
+3. Release mode compilation:
+```bash
+make -f Makefile.simple release
+```
 
-## 2. Création du DMG
+## 2. Creating the DMG
 
-### Option 1 : DMG avec placeholder
+### Option 1: DMG with placeholder
 
-Si vous ne pouvez pas compiler l'application complète, vous pouvez créer un DMG avec une application placeholder :
+If you cannot compile the full application, you can create a DMG with a placeholder application:
 
 ```bash
 make -f Makefile.simple dmg-placeholder
 ```
 
-Cette commande crée un DMG contenant :
-- Une application placeholder qui affiche un message lorsqu'elle est lancée
-- Un lien symbolique vers le dossier Applications
+This command creates a DMG containing:
+- A placeholder application that displays a message when launched
+- A symbolic link to the Applications folder
 
-### Option 2 : DMG avec l'application réelle
+### Option 2: DMG with the real application
 
-Si la compilation fonctionne correctement, vous pouvez créer un DMG avec l'application compilée :
+If the compilation works correctly, you can create a DMG with the compiled application:
 
 ```bash
 make -f Makefile.simple dmg
 ```
 
-Cette commande tente de compiler l'application en mode release, puis crée un DMG contenant :
-- L'application compilée
-- Un lien symbolique vers le dossier Applications
+This command attempts to compile the application in release mode, then creates a DMG containing:
+- The compiled application
+- A symbolic link to the Applications folder
 
-Si la compilation échoue, elle revient automatiquement à la création d'un DMG avec placeholder.
+If the compilation fails, it automatically falls back to creating a DMG with placeholder.
 
-## 3. Structure du DMG
+## 3. DMG structure
 
-Après avoir exécuté l'une des commandes ci-dessus, vous trouverez le fichier DMG à l'emplacement suivant :
+After running one of the above commands, you will find the DMG file in the following location:
 
 ```
 .build/MacLocalTranslator.dmg
 ```
 
-Vous pouvez monter ce DMG en double-cliquant dessus, puis installer l'application en la faisant glisser vers le dossier Applications.
+You can mount this DMG by double-clicking on it, and then install the application by dragging it to the Applications folder.
 
-## 4. Publication d'une release
+## 4. Publishing a release
 
-Pour publier le DMG dans une release GitHub :
+To publish the DMG to a GitHub release:
 
-1. Accédez à votre dépôt sur GitHub
-2. Allez dans la section "Releases"
-3. Cliquez sur "Draft a new release"
-4. Créez un tag pour la version (ex: v1.0.0)
-5. Ajoutez un titre et une description
-6. Téléversez le fichier DMG
-7. Publiez la release
+1. Go to your repository on GitHub
+2. Go to the "Releases" section
+3. Click "Draft a new release"
+4. Create a tag for the release (e.g. v1.0.0)
+5. Add a title and description
+6. Upload the DMG file
+7. Publish the release
 
-## Dépannage
+## Troubleshooting
 
-### Si la compilation échoue
+### If the build fails
 
-Si vous rencontrez des erreurs lors de la compilation :
+If you encounter errors while building:
 
-1. Vérifiez que vous avez la bonne version de Swift installée :
-   ```bash
-   swift --version
-   ```
+1. Make sure you have the correct version of Swift installed:
+```bash
+swift --version
+```
 
-2. Assurez-vous que les outils en ligne de commande Xcode sont installés :
-   ```bash
-   xcode-select --install
-   ```
+2. Make sure the Xcode command line tools are installed:
+```bash
+xcode-select --install
+```
 
-3. Pour un DMG rapide sans compilation, utilisez :
-   ```bash
-   make -f Makefile.simple dmg-placeholder
-   ```
+3. For a quick DMG without compiling, use:
+```bash
+make -f Makefile.simple dmg-placeholder
+```
