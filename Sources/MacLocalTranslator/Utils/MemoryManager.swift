@@ -198,7 +198,7 @@ class MemoryManager {
         case .warning:
             Logger.warning(message, category: .system)
         case .critical:
-            Logger.error(message, category: .system)
+            Logger.logError(message, category: .system)
         }
     }
     
