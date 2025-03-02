@@ -10,7 +10,7 @@ import Foundation
 extension FileManager {
     /// Répertoire d'application support de l'application
     static var applicationSupportDirectory: URL? {
-        return FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?.
+        return FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first?
             appendingPathComponent("MacLocalTranslator")
     }
     
