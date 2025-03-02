@@ -64,29 +64,7 @@ make run
 
 The application is built on a modular architecture for easy maintenance and extension.
 
-```mermaid
-flowchart TD
-subgraph Interface
-A[\"ContentView\"] --> B[\"ConversationView\"]
-A --> C[\"ToolbarView\"]
-A --> D[\"ControlPanelView\"]
-end
-
-subgraph Services
-E[\"AudioRecordingService\"] --> I[\"TranslationCoordinator\"]
-F[\"SpeechRecognitionService\"] --> I
-G[\"TranslationService\"] --> I
-H[\"SpeechSynthesisService\"] --> I
-end
-
-subgraph Models
-J[\"AppState\"] --> I
-K[\"ModelManager\"] --> I
-L[\"PreferencesManager\"] --> I
-end
-
-I --> A
-```
+[releasesarchitecture_overviewpage](https://github.com/nabz0r/mac-local-translator/docs/architecture_overview.md)
 
 ## 🎯 User Guide
 
