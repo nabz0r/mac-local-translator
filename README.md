@@ -114,22 +114,6 @@ I --> A
 
 More languages ​​are under development. Check out the [roadmap](ROADMAP.md) for more information.
 
-## 👥 Contribute
-
-Contributions are welcome! Check out our [contributing guide](CONTRIBUTING.md) to get started.
-
-```mermaid
-gitGraph
- commit id: \"Initial commit\"
- branch feature
- checkout feature
- commit id: \"Add feature\"
- commit id: \"Fix tests\"
- checkout hand
- merge feature
- commit id: \"Release v1.0\"
-```
-
 ## 🤝 Contribution
 
 We welcome:
