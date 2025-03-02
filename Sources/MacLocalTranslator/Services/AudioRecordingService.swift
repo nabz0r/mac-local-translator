@@ -3,6 +3,7 @@
 //  MacLocalTranslator
 //
 //  Service responsable de l'enregistrement audio via le microphone
+//  Implémentation compatible macOS
 //
 
 import Foundation
@@ -26,10 +27,7 @@ class AudioRecordingService: NSObject, ObservableObject {
     
     // MARK: - Propriétés privées
     
-    /// Session audio
-    private var audioSession: AVAudioSession!
-    
-    /// Engine audio
+    /// Engine audio - compatible macOS
     private var audioEngine: AVAudioEngine!
     
     /// Noeud d'entrée audio
@@ -44,9 +42,6 @@ class AudioRecordingService: NSObject, ObservableObject {
     /// Durée de silence requise pour considérer qu'une personne a terminé de parler
     private var silenceDuration: Double = 1.5
     
-    /// Timer de détection de silence
-    private var silenceTimer: Timer?
-    
     /// Dernier moment où un son a été détecté
     private var lastSoundDetectedTime: Date?
     
@@ -54,7 +49,6 @@ class AudioRecordingService: NSObject, ObservableObject {
     
     override init() {
         super.init()
-        setupAudioSession()
         setupAudioEngine()
     }
     
@@ -113,8 +107,6 @@ class AudioRecordingService: NSObject, ObservableObject {
         
         isRecording = false
         lastSoundDetectedTime = nil
-        silenceTimer?.invalidate()
-        silenceTimer = nil
     }
     
     /// Définit le gestionnaire de données audio
@@ -124,22 +116,14 @@ class AudioRecordingService: NSObject, ObservableObject {
     
     // MARK: - Méthodes privées
     
-    /// Configure la session audio
-    private func setupAudioSession() {
-        audioSession = AVAudioSession.sharedInstance()
-        
-        do {
-            try audioSession.setCategory(.record, mode: .default)
-            try audioSession.setActive(true)
-        } catch {
-            recordingError = error
-        }
-    }
-    
-    /// Configure le moteur audio
+    /// Configure le moteur audio - compatible macOS
     private func setupAudioEngine() {
         audioEngine = AVAudioEngine()
         inputNode = audioEngine.inputNode
+        
+        // Vérification que le microphone est accessible
+        let inputFormat = inputNode.inputFormat(forBus: 0)
+        Logger.info("Format audio d'entrée: \(inputFormat)", category: .audio)
     }
     
     /// Met à jour le niveau audio actuel
@@ -198,7 +182,6 @@ class AudioRecordingService: NSObject, ObservableObject {
     
     deinit {
         stopRecording()
-        try? audioSession.setActive(false)
     }
 }
 
