@@ -1,34 +1,152 @@
-# Mac Local Translator
+# 🎤 Mac Local Translator
 
-Application de traduction locale pour Mac qui utilise le microphone pour écouter les personnes parler à tour de rôle et traduire leurs propos, similaire à Google Traducteur mais entièrement en local.
+[![Build Status](https://img.shields.io/github/workflow/status/nabz0r/mac-local-translator/CI?style=flat-square)](https://github.com/nabz0r/mac-local-translator/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Swift Version](https://img.shields.io/badge/Swift-5.7-orange.svg?style=flat-square)](https://swift.org)
+[![Platform](https://img.shields.io/badge/Platform-macOS%2012%2B-lightgrey?style=flat-square)](https://www.apple.com/macos/)
 
-## Caractéristiques
+> **Traduction conversationnelle en temps réel, entièrement hors-ligne et respectueuse de la vie privée** 🔒
 
-- **Entièrement local** : Aucune connexion internet requise pour le fonctionnement
-- **Respect de la vie privée** : Les données vocales ne quittent jamais votre appareil
-- **Interface intuitive** : Simple à utiliser pour faciliter les conversations multilingues
-- **Traduction bidirectionnelle** : Permet à deux personnes parlant des langues différentes de converser
-- **Utilisation de modèles optimisés** : Équilibre entre précision et performances
+<p align="center">
+  <img src="resources/images/app_banner.png" alt="Mac Local Translator Banner" width="800">
+</p>
 
-## Technologie
+## 🌟 Caractéristiques principales
 
-- **Frontend**: SwiftUI pour une interface native macOS
-- **Reconnaissance vocale**: Whisper.cpp (modèle local optimisé)
-- **Traduction**: LibreTranslate/Argos Translate (modèles locaux)
-- **Synthèse vocale**: API AVSpeechSynthesizer de macOS
+- **Entièrement local** : Aucune connexion internet requise 📶
+- **Privé & Sécurisé** : Vos conversations ne quittent jamais votre appareil 🔐
+- **Bidirectionnel** : Traduction naturelle entre deux interlocuteurs 👥
+- **Performant** : Modèles optimisés pour les Mac Intel et Apple Silicon ⚡
+- **Intuitif** : Interface élégante centrée sur la conversation 💬
 
-## Installation
+## 🔍 Aperçu
 
-Consultez le guide d'installation dans [docs/setup.md](docs/setup.md).
+Mac Local Translator permet de traduire des conversations en temps réel sans dépendre de services cloud. L'application utilise des modèles locaux avancés pour la reconnaissance vocale et la traduction, garantissant votre confidentialité tout en offrant des performances excellentes.
 
-## Utilisation
+```mermaid
+flowchart LR
+    A[Parole utilisateur A] -->|Microphone| B[Reconnaissance vocale]
+    B -->|Texte transcrit| C[Traduction]
+    C -->|Texte traduit| D[Synthèse vocale]
+    D -->|Audio| E[Utilisateur B entend]
+    E -->|Répond| F[Cycle inverse]
+    F -->|Microphone| B
+```
 
-Consultez le guide utilisateur dans [docs/user_guide.md](docs/user_guide.md).
+## 🚀 Installation rapide
 
-## Architecture
+### Prérequis
+- macOS 12.0 ou plus récent
+- 8 GB RAM minimum (16 GB recommandés)
+- 5 GB d'espace disque disponible
 
-Consultez la documentation d'architecture dans [docs/architecture.md](docs/architecture.md).
+### Méthode 1: Installation depuis le DMG
+1. Téléchargez la dernière version depuis la [page des releases](https://github.com/nabz0r/mac-local-translator/releases)
+2. Montez le fichier DMG et glissez l'application dans votre dossier Applications
+3. Lancez l'application
 
-## Licence
+### Méthode 2: Compilation depuis les sources
 
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+```bash
+# Cloner le dépôt
+git clone https://github.com/nabz0r/mac-local-translator.git
+cd mac-local-translator
+
+# Installer les dépendances et télécharger les modèles
+make download-models
+
+# Compiler l'application
+make build
+
+# Lancer l'application
+make run
+```
+
+## 🏛️ Architecture
+
+L'application est construite sur une architecture modulaire pour une maintenance et une extension faciles.
+
+```mermaid
+flowchart TD
+    subgraph Interface
+        A["ContentView"] --> B["ConversationView"]
+        A --> C["ToolbarView"]
+        A --> D["ControlPanelView"]
+    end
+    
+    subgraph Services
+        E["AudioRecordingService"] --> I["TranslationCoordinator"]
+        F["SpeechRecognitionService"] --> I
+        G["TranslationService"] --> I
+        H["SpeechSynthesisService"] --> I
+    end
+    
+    subgraph Modèles
+        J["AppState"] --> I
+        K["ModelManager"] --> I
+        L["PreferencesManager"] --> I
+    end
+    
+    I --> A
+```
+
+## 🎯 Guide d'utilisation
+
+1. **Sélection des langues** : Choisissez les langues source et cible dans la barre d'outils
+2. **Démarrage** : Appuyez sur le bouton d'enregistrement ou utilisez Cmd+Espace
+3. **Parlez** : Parlez clairement dans votre microphone (l'indicateur de niveau audio vous aidera)
+4. **Écoutez** : La traduction sera affichée et prononcée automatiquement
+5. **Réponse** : Votre interlocuteur peut répondre dans sa langue et le cycle continue
+
+## 🛠️ Technologies utilisées
+
+- **Interface utilisateur** : SwiftUI
+- **Reconnaissance vocale** : Whisper.cpp (version optimisée de OpenAI Whisper)
+- **Traduction** : Modèles LibreTranslate/Argos Translate optimisés
+- **Synthèse vocale** : AVSpeechSynthesizer avec des voix de qualité
+
+## 🗣️ Langues supportées
+
+- 🇫🇷 Français
+- 🇬🇧 Anglais
+- 🇪🇸 Espagnol
+- 🇩🇪 Allemand
+- 🇮🇹 Italien
+- 🇵🇹 Portugais
+
+D'autres langues sont en cours de développement. Consultez la [feuille de route](ROADMAP.md) pour plus d'informations.
+
+## 👥 Contribution
+
+Les contributions sont les bienvenues ! Consultez notre [guide de contribution](CONTRIBUTING.md) pour commencer.
+
+```mermaid
+gitGraph
+    commit id: "Initial commit"
+    branch feature
+    checkout feature
+    commit id: "Add feature"
+    commit id: "Fix tests"
+    checkout main
+    merge feature
+    commit id: "Release v1.0"
+```
+
+## 📝 Licence
+
+Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## 🙏 Remerciements
+
+- [OpenAI Whisper](https://github.com/openai/whisper) pour le modèle de reconnaissance vocale
+- [LibreTranslate](https://github.com/LibreTranslate/LibreTranslate) pour les modèles de traduction
+- Tous les contributeurs qui ont rendu ce projet possible
+
+---
+
+<p align="center">
+  <b>Respectez la vie privée. Traduisez localement.</b><br>
+  <a href="https://github.com/nabz0r/mac-local-translator/issues">Signaler un problème</a> •
+  <a href="ROADMAP.md">Feuille de route</a> •
+  <a href="docs/user_guide.md">Guide utilisateur</a>
+</p>
