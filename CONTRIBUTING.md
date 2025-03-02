@@ -1,106 +1,111 @@
-# Guide de contribution à Mac Local Translator
+# Contributing to Mac Local Translator
 
-Merci de votre intérêt pour contribuer à Mac Local Translator ! Ce document fournit des directives pour contribuer au projet et assurer un processus de développement collaboratif efficace.
+Thank you for your interest in contributing to Mac Local Translator! This document provides guidelines for contributing to the project and ensuring an efficient collaborative development process.
 
-## Processus de contribution
+## Contributing Process
 
-### Signaler des bugs
+### Reporting Bugs
 
-Si vous avez identifié un bug ou un problème :
+If you have identified a bug or issue:
 
-1. Vérifiez que le bug n'a pas déjà été signalé dans les issues GitHub.
-2. Utilisez le modèle de rapport de bug pour créer une nouvelle issue.
-3. Incluez des étapes de reproduction détaillées et, si possible, des captures d'écran.
-4. Mentionnez votre environnement (OS, version de macOS, etc.).
+1. Check that the bug has not already been reported in GitHub issues.
 
-### Proposer des améliorations
+2. Use the bug report template to create a new issue.
 
-Pour proposer de nouvelles fonctionnalités ou améliorations :
+3. Include detailed reproduction steps and, if possible, screenshots.
 
-1. Ouvrez une issue en utilisant le modèle de demande de fonctionnalité.
-2. Décrivez clairement la fonctionnalité, son cas d'utilisation et comment elle s'intègre au projet.
-3. Si possible, indiquez les composants qui devront être modifiés.
+4. Mention your environment (OS, macOS version, etc.).
 
-### Soumettre des modifications
+### Suggesting Improvements
 
-Pour contribuer du code :
+To propose new features or improvements:
 
-1. Faites un fork du dépôt et créez une branche à partir de `main`.
-2. Nommez votre branche de manière descriptive (ex: `feature/new-translation-engine` ou `fix/audio-recording-issue`).
-3. Suivez les conventions de codage listées ci-dessous.
-4. Assurez-vous que les tests couvrent vos modifications.
-5. Créez une Pull Request avec une description claire de vos changements.
+1. Open an issue using the feature request template.
 
-## Conventions de codage
+2. Clearly describe the feature, its use case, and how it fits into the project.
 
-### Style de code
+3. If possible, indicate the components that will need to be changed.
 
-- Suivez le [guide de style Swift d'Apple](https://swift.org/documentation/api-design-guidelines/).
-- Utilisez 4 espaces pour l'indentation (pas de tabulations).
-- Limitez les lignes à 100 caractères lorsque c'est raisonnable.
-- Organisez votre code avec des marques MARK pour améliorer la lisibilité.
+### Submitting changes
+
+To contribute code:
+
+1. Fork the repository and create a branch from `main`.
+2. Name your branch descriptively (e.g. `feature/new-translation-engine` or `fix/audio-recording-issue`).
+3. Follow the coding conventions listed below.
+4. Make sure your tests cover your changes.
+5. Create a Pull Request with a clear description of your changes.
+
+## Coding conventions
+
+### Code style
+
+- Follow Apple's [Swift style guide](https://swift.org/documentation/api-design-guidelines/).
+- Use 4 spaces for indentation (no tabs).
+- Limit lines to 100 characters when reasonable.
+- Organize your code with MARK marks to improve readability.
 
 ### Documentation
 
-- Documentez toutes les méthodes et propriétés publiques avec des commentaires compatibles avec Xcode (///). 
-- Expliquez le "pourquoi" plutôt que le "quoi" dans vos commentaires.
-- Mettez à jour la documentation utilisateur si nécessaire.
+- Document all public methods and properties with Xcode-compatible comments (///).
+- Explain the "why" rather than the "what" in your comments.
+- Update user documentation as needed.
 
-### Tests
+### Testing
 
-- Écrivez des tests unitaires pour les nouvelles fonctionnalités.
-- Maintenez la couverture de test à un niveau acceptable.
-- Exécutez les tests avant de soumettre une PR.
+- Write unit tests for new features.
+- Maintain test coverage at an acceptable level.
+- Run tests before submitting a PR.
 
-## Architecture du projet
+## Project Architecture
 
-Mac Local Translator suit une architecture modulaire avec les composants principaux suivants :
+Mac Local Translator follows a modular architecture with the following main components:
 
-- **Models** : Contient les structures de données et la logique métier.
-- **Views** : Implémente l'interface utilisateur avec SwiftUI.
-- **Services** : Gère les fonctionnalités spécifiques (audio, reconnaissance vocale, traduction).
-- **Coordinator** : Orchestre les interactions entre les services.
-- **Utils** : Fournit des utilitaires et des extensions réutilisables.
+- **Models**: Contains data structures and business logic.
+- **Views**: Implements the user interface with SwiftUI.
+- **Services**: Handles specific features (audio, speech recognition, translation).
+- **Coordinator**: Orchestrates interactions between services.
+- **Utils**: Provides reusable utilities and extensions.
 
-Lors de l'implémentation de nouvelles fonctionnalités, respectez cette séparation des responsabilités.
+When implementing new features, respect this separation of responsibilities.
 
-## Configuration de l'environnement de développement
+## Development environment setup
 
-### Prérequis
+### Prerequisites
 
-- macOS 12.0 ou plus récent
-- Xcode 14.0 ou plus récent
-- Swift 5.7 ou plus récent
+- macOS 12.0 or newer
+- Xcode 14.0 or newer
+- Swift 5.7 or newer
 
-### Outils recommandés
+### Recommended tools
 
-- [SwiftLint](https://github.com/realm/SwiftLint) pour analyser le code
-- [Jazzy](https://github.com/realm/jazzy) pour générer la documentation
+- [SwiftLint](https://github.com/realm/SwiftLint) to analyze the code
+- [Jazzy](https://github.com/realm/jazzy) to generate the documentation
 
-### Configuration initiale
+### Initial setup
 
-1. Clonez le dépôt : `git clone https://github.com/nabz0r/mac-local-translator.git`
-2. Exécutez `make download-models` pour télécharger les modèles requis
-3. Ouvrez le projet dans Xcode ou utilisez `swift build` pour compiler
+1. Clone the repository: `git clone https://github.com/nabz0r/mac-local-translator.git`
+2. Run `make download-models` to download the required models
+3. Open the project in Xcode or use `swift build` to compile
 
-## Processus de publication
+## Release process
 
-Le projet suit le versionnement sémantique (MAJOR.MINOR.PATCH) :
+The project follows semantic versioning (MAJOR.MINOR.PATCH):
 
-- MAJOR : changements incompatibles avec les versions précédentes
-- MINOR : ajouts de fonctionnalités compatibles avec les versions précédentes
-- PATCH : corrections de bugs compatibles avec les versions précédentes
+- MAJOR: changes incompatible with previous versions
+- MINOR: Backward compatible feature additions
+- PATCH: Backward compatible bug fixes
 
-L'intégration continue est configurée pour construire et tester automatiquement les Pull Requests et les tags. Les versions sont automatiquement publiées lorsqu'un nouveau tag est créé.
+Continuous integration is configured to automatically build and test Pull Requests and tags. Builds are automatically published when a new tag is created.
 
 ## Communication
 
-- Utilisez les issues GitHub pour les discussions techniques.
-- Maintenez un ton respectueux et professionnel dans toutes les communications.
-- Pour les discussions plus longues, envisagez d'utiliser les discussions GitHub.
+- Use GitHub issues for technical discussions.
+- Maintain a respectful and professional tone in all communications.
+- For longer discussions, consider using GitHub discussions.
 
-## Licence
+## License
 
-En contribuant à ce projet, vous acceptez que vos contributions soient sous la même licence que le projet (MIT).
+By contributing to this project, you agree that your contributions are licensed under the same license as the project (MIT).
 
-Merci de contribuer à Mac Local Translator !
+Thank you for contributing to Mac Local Translator!
