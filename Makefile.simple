@@ -1,0 +1,73 @@
+# Simplified Makefile for Mac Local Translator
+
+# Variables
+APP_NAME = MacLocalTranslator
+BUILD_DIR = .build
+DMG_DIR = $(BUILD_DIR)/dmg
+DMG_NAME = $(APP_NAME).dmg
+
+# Default target
+all: build
+
+# Clean the build directory
+clean:
+	@echo "Cleaning build directory..."
+	rm -rf $(BUILD_DIR)
+
+# Build the application
+build:
+	@echo "Building $(APP_NAME)..."
+	swift build
+
+# Build the application in release mode
+release:
+	@echo "Building $(APP_NAME) in release mode..."
+	swift build -c release
+
+# Create a DMG file using a simple placeholder app
+dmg-placeholder:
+	@echo "Creating placeholder app for DMG..."
+	@mkdir -p $(DMG_DIR)/$(APP_NAME).app/Contents/MacOS
+	@mkdir -p $(DMG_DIR)/$(APP_NAME).app/Contents/Resources
+	
+	@echo "Creating Info.plist..."
+	@echo '<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"><plist version="1.0"><dict><key>CFBundleExecutable</key><string>AppLauncher</string><key>CFBundleIdentifier</key><string>com.example.$(APP_NAME)</string><key>CFBundleName</key><string>Mac Local Translator</string><key>CFBundleVersion</key><string>1.0</string></dict></plist>' > $(DMG_DIR)/$(APP_NAME).app/Contents/Info.plist
+	
+	@echo "Creating launcher script..."
+	@echo '#!/bin/bash\necho "Mac Local Translator - Demo Version"\necho "This is a placeholder application for demonstration purposes."\nosascript -e "display dialog \"Cette application est une démonstration de Mac Local Translator.\" buttons {\"OK\"} default button 1"' > $(DMG_DIR)/$(APP_NAME).app/Contents/MacOS/AppLauncher
+	@chmod +x $(DMG_DIR)/$(APP_NAME).app/Contents/MacOS/AppLauncher
+	
+	@echo "Creating symbolic link to Applications folder..."
+	@ln -s /Applications $(DMG_DIR)/Applications
+	
+	@echo "Creating DMG file..."
+	@hdiutil create -volname "Mac Local Translator" -srcfolder $(DMG_DIR) -ov -format UDZO $(BUILD_DIR)/$(DMG_NAME)
+	@echo "DMG created at $(BUILD_DIR)/$(DMG_NAME)"
+
+# Try to build the real app and create a DMG
+dmg: release
+	@echo "Creating DMG from built application..."
+	@mkdir -p $(DMG_DIR)
+	@if [ -d "$(BUILD_DIR)/release/$(APP_NAME).app" ]; then \
+		cp -R $(BUILD_DIR)/release/$(APP_NAME).app $(DMG_DIR)/; \
+		ln -s /Applications $(DMG_DIR)/Applications; \
+		hdiutil create -volname "Mac Local Translator" -srcfolder $(DMG_DIR) -ov -format UDZO $(BUILD_DIR)/$(DMG_NAME); \
+		echo "DMG created at $(BUILD_DIR)/$(DMG_NAME)"; \
+	else \
+		echo "Application not found at $(BUILD_DIR)/release/$(APP_NAME).app"; \
+		echo "Falling back to placeholder DMG..."; \
+		make dmg-placeholder; \
+	fi
+
+# Help target
+help:
+	@echo "Available targets:"
+	@echo "  all             Build the application (default)"
+	@echo "  clean           Clean the build directory"
+	@echo "  build           Build the application in debug mode"
+	@echo "  release         Build the application in release mode"
+	@echo "  dmg             Create a DMG file from the built application"
+	@echo "  dmg-placeholder Create a DMG file with a placeholder application"
+	@echo "  help            Show this help message"
+
+.PHONY: all clean build release dmg dmg-placeholder help
