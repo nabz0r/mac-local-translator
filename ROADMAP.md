@@ -1,95 +1,95 @@
-# Feuille de route de Mac Local Translator
+# Mac Local Translator Roadmap
 
-Ce document présente la vision à long terme et les objectifs de développement pour Mac Local Translator. Il s'agit d'un document évolutif qui sera mis à jour à mesure que le projet progresse.
+This document presents the long-term vision and development goals for Mac Local Translator. This is a living document that will be updated as the project progresses.
 
 ## Version 1.0.0 (Base)
 
-### Fonctionnalités principales
+### Main features
 
-- [x] Interface utilisateur de base avec SwiftUI
-- [x] Enregistrement audio à partir du microphone
-- [x] Détection d'activité vocale et de silence
-- [x] Intégration basique de Whisper.cpp pour la reconnaissance vocale
-- [x] Intégration basique de LibreTranslate pour la traduction
-- [x] Synthèse vocale via AVSpeechSynthesizer
-- [x] Affichage des conversations avec texte original et traduit
-- [x] Sélection des langues source et cible
-- [x] Paramètres de base pour la configuration des préférences
+- [x] Basic user interface with SwiftUI
+- [x] Audio recording from microphone
+- [x] Voice activity and silence detection
+- [x] Basic integration of Whisper.cpp for speech recognition
+- [x] Basic integration of LibreTranslate for translation
+- [x] Speech synthesis via AVSpeechSynthesizer
+- [x] Display conversations with original and translated text
+- [x] Selection of source and target languages
+- [x] Basic settings for configuring preferences
 
-### Améliorations techniques
+### Technical improvements
 
-- [x] Architecture modulaire et extensible
-- [x] Gestion des modèles (téléchargement, sélection, etc.)
-- [x] Configuration de l'intégration continue
-- [x] Tests unitaires de base
-- [x] Documentation du code et de l'architecture
+- [x] Modular and extensible architecture
+- [x] Template management (upload, selection, etc.)
+- [x] Continuous integration configuration
+- [x] Basic unit tests
+- [x] Code and architecture documentation
 
-## Version 1.1.0 (Optimisations)
+## Version 1.1.0 (Optimizations)
 
-### Fonctionnalités à implémenter
+### Features to implement
 
-- [ ] Support de plus de langues (au moins 8-10 langues principales)
-- [ ] Mode de traduction semi-continue (traduction partielle pendant que l'utilisateur parle)
-- [ ] Interface utilisateur améliorée avec plus d'indicateurs visuels
-- [ ] Thèmes personnalisables (clair/sombre/système)
-- [ ] Exportation des conversations au format texte et audio
+- [ ] Support for more languages ​​(at least 8-10 major languages)
+- [ ] Semi-continuous translation mode (partial translation while the user is speaking)
+- [ ] Improved UI with more visual indicators
+- [ ] Customizable themes (light/dark/system)
+- [ ] Export conversations to text and audio
 
-### Optimisations techniques
+### Technical optimizations
 
-- [ ] Quantification des modèles pour réduire l'empreinte mémoire
-- [ ] Accélération GPU pour la reconnaissance vocale et la traduction
-- [ ] Optimisation des flux de données pour réduire la latence
-- [ ] Mise en cache des résultats de traduction fréquents
-- [ ] Tests de performances et benchmarks
+- [ ] Model quantization to reduce memory footprint
+- [ ] GPU acceleration for speech recognition and translation
+- [ ] Optimization of data streams to reduce latency
+- [ ] Caching of frequent translation results
+- [ ] Performance tests and benchmarks
 
-## Version 1.2.0 (Avancée)
+## Version 1.2.0 (Advanced)
 
-### Fonctionnalités à implémenter
+### Features to implement
 
-- [ ] Mode conversation (détection automatique du locuteur)
-- [ ] Support des accents et des dialectes régionaux
-- [ ] Correction orthographique et grammaticale avant traduction
-- [ ] Détection automatique de la langue
-- [ ] Glossaires personnalisés pour des domaines spécifiques
-- [ ] Intégration avec le système de dictionnaire macOS
+- [ ] Conversation mode (automatic speaker detection)
+- [ ] Support for regional accents and dialects
+- [ ] Spelling and grammar correction before translation
+- [ ] Automatic language detection
+- [ ] Custom glossaries for specific domains
+- [ ] Integration with macOS dictionary system
 
-### Améliorations techniques
+### Technical improvements
 
-- [ ] Mise à jour dynamique des modèles sans redémarrer l'application
-- [ ] Système de plugins pour extensions tierces
-- [ ] Synchronisation des paramètres via iCloud
-- [ ] Couverture de test complète (>80%)
+- [ ] Dynamic template update without restarting the application
+- [ ] Plugin system for third-party extensions
+- [ ] Settings synchronization via iCloud
+- [ ] Full test coverage (>80%)
 
-## Version 2.0.0 (Professionnelle)
+## Version 2.0.0 (Professional)
 
-### Fonctionnalités à implémenter
+### Features to be implemented
 
-- [ ] Support de conférences avec plusieurs participants
-- [ ] Reconnaissance et distinction des locuteurs
-- [ ] Intégration avec des services de visioconférence
-- [ ] Application iOS compagnon pour utilisation mobile
-- [ ] Mode hors-ligne complet avec tous les modèles intégrés
-- [ ] Support de la traduction de documents (PDF, Word, etc.)
-- [ ] Accessibilité améliorée pour les utilisateurs malvoyants et malentendants
+- [ ] Support for conferences with multiple participants
+- [ ] Speaker recognition and distinction
+- [ ] Integration with video conferencing services
+- [ ] Companion iOS application for mobile use
+- [ ] Full offline mode with all built-in templates
+- [ ] Support for document translation (PDF, Word, etc.)
+- [ ] Improved accessibility for visually and hearing impaired users
 
-### Innovations techniques
+### Technical innovations
 
-- [ ] Migration vers des modèles de traduction plus avancés (modèles de transformateurs optimisés pour CPU/GPU)
-- [ ] API pour intégration avec d'autres applications
-- [ ] Système d'apprentissage continu pour améliorer les traductions
-- [ ] Système de développement extensible pour plugins communautaires
+- [ ] Migration to more advanced translation models (CPU/GPU optimized transformer models)
+- [ ] API for integration with other applications
+- [ ] Continuous learning system to improve translations
+- [ ] Extensible development system for community plugins
 
-## Idées futures à explorer
+## Future ideas to explore
 
-- Intégration de la traduction visuelle (texte dans les images)
-- Support de la traduction en temps réel de flux audio (radio, podcasts, etc.)
-- Mode interprétation simultanée pour événements en direct
-- Apprentissage par l'utilisateur de vocabulaire spécifique
-- Intégration avec des services de sous-titrage pour les vidéos
-- Mode pédagogique pour l'apprentissage des langues
+- Integration of visual translation (text in images)
+- Support for real-time translation of audio streams (radio, podcasts, etc.)
+- Simultaneous interpretation mode for live events
+- User learning of specific vocabulary
+- Integration with subtitling services for videos
+- Pedagogical mode for language learning
 
-## Contribuer à la feuille de route
+## Contribute to the roadmap
 
-Cette feuille de route est ouverte aux suggestions et aux contributions. Si vous avez des idées pour améliorer Mac Local Translator ou si vous souhaitez contribuer à une des fonctionnalités listées, veuillez ouvrir une issue sur GitHub pour en discuter.
+This roadmap is open to suggestions and contributions. If you have ideas to improve Mac Local Translator or would like to contribute to any of the features listed, please open an issue on GitHub to discuss it.
 
-Les priorités peuvent évoluer en fonction des besoins des utilisateurs et des contraintes techniques. Les dates de publication précises ne sont pas fixées pour permettre un développement flexible et de qualité.
+Priorities may change based on user needs and technical constraints. Specific release dates are not set to allow for flexible and quality development.
