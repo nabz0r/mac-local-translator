@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AppKit
 
 struct ToolbarView: View {
     // MARK: - Propriétés de l'environnement
@@ -65,7 +66,7 @@ struct ToolbarView: View {
     
     /// Ouvre la fenêtre des paramètres
     private func openSettings() {
-        NSApp.sendAction(Selector("showPreferencesWindow:"), to: nil, from: nil)
+        NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
     }
 }
 

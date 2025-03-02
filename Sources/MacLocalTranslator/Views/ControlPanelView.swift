@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AppKit
 
 struct ControlPanelView: View {
     // MARK: - Propriétés de l'environnement
@@ -214,7 +215,7 @@ struct ControlPanelView: View {
     
     /// Ouvre le gestionnaire de modèles dans les préférences
     private func openModelManager() {
-        NSApp.sendAction(Selector("showPreferencesWindow:"), to: nil, from: nil)
+        NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
         // Dans une implémentation réelle, on pourrait également sélectionner l'onglet des modèles
     }
 }
