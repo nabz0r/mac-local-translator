@@ -60,7 +60,7 @@ extension FileManager {
                 try createDirectoryIfNeeded(at: historyDir)
             }
         } catch {
-            Logger.error("Erreur lors de la création des répertoires : \(error.localizedDescription)", category: .storage)
+            Logger.logError("Erreur lors de la création des répertoires : \(error.localizedDescription)", category: .storage)
         }
     }
     
@@ -86,7 +86,7 @@ extension FileManager {
                 }
             }
         } catch {
-            Logger.error("Erreur lors du nettoyage des fichiers journaux : \(error.localizedDescription)", category: .storage)
+            Logger.logError("Erreur lors du nettoyage des fichiers journaux : \(error.localizedDescription)", category: .storage)
         }
     }
     
@@ -115,7 +115,7 @@ extension FileManager {
             
             return size
         } catch {
-            Logger.error("Erreur lors du calcul de la taille du répertoire : \(error.localizedDescription)", category: .storage)
+            Logger.logError("Erreur lors du calcul de la taille du répertoire : \(error.localizedDescription)", category: .storage)
             return 0
         }
     }
