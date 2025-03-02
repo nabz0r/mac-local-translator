@@ -52,7 +52,8 @@ struct SetupGuideView: View {
                 completionStep
                     .tag(3)
             }
-            .tabViewStyle(.page(indexDisplayMode: .never))
+            // Utiliser un style de TabView compatible macOS
+            .tabViewStyle(.automatic)
             .frame(width: 500, height: 400)
             
             // Indicateur d'étape
