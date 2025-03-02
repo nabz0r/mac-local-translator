@@ -11,19 +11,20 @@ import Combine
 class PreferencesManager: ObservableObject {
     // MARK: - Clés de préférences
     
-    private enum PreferenceKeys {
-        static let sourceLanguage = "sourceLanguage"
-        static let targetLanguage = "targetLanguage"
-        static let selectedSpeechModel = "selectedSpeechModel"
-        static let selectedTranslationModel = "selectedTranslationModel"
-        static let silenceThreshold = "silenceThreshold"
-        static let silenceDuration = "silenceDuration"
-        static let outputVolume = "outputVolume"
-        static let saveHistory = "saveHistory"
-        static let historyRetentionDays = "historyRetentionDays"
-        static let useManualMode = "useManualMode"
-        static let fontSize = "fontSize"
-        static let useDarkMode = "useDarkMode"
+    /// Enum pour les clés de préférences, avec valeurs String
+    enum PreferenceKey: String {
+        case sourceLanguage = "sourceLanguage"
+        case targetLanguage = "targetLanguage"
+        case selectedSpeechModel = "selectedSpeechModel"
+        case selectedTranslationModel = "selectedTranslationModel"
+        case silenceThreshold = "silenceThreshold"
+        case silenceDuration = "silenceDuration"
+        case outputVolume = "outputVolume"
+        case saveHistory = "saveHistory"
+        case historyRetentionDays = "historyRetentionDays"
+        case useManualMode = "useManualMode"
+        case fontSize = "fontSize"
+        case useDarkMode = "useDarkMode"
     }
     
     // MARK: - Propriétés publiées
@@ -31,56 +32,56 @@ class PreferencesManager: ObservableObject {
     /// Niveau de seuil de silence pour la détection de fin de parole (0.0 - 1.0)
     @Published var silenceThreshold: Float {
         didSet {
-            save(.silenceThreshold, value: silenceThreshold)
+            save(PreferenceKey.silenceThreshold.rawValue, value: silenceThreshold)
         }
     }
     
     /// Durée de silence nécessaire pour considérer qu'une personne a fini de parler (en secondes)
     @Published var silenceDuration: Double {
         didSet {
-            save(.silenceDuration, value: silenceDuration)
+            save(PreferenceKey.silenceDuration.rawValue, value: silenceDuration)
         }
     }
     
     /// Volume de sortie pour la synthèse vocale (0.0 - 1.0)
     @Published var outputVolume: Float {
         didSet {
-            save(.outputVolume, value: outputVolume)
+            save(PreferenceKey.outputVolume.rawValue, value: outputVolume)
         }
     }
     
     /// Indique si l'historique des conversations doit être enregistré
     @Published var saveHistory: Bool {
         didSet {
-            save(.saveHistory, value: saveHistory)
+            save(PreferenceKey.saveHistory.rawValue, value: saveHistory)
         }
     }
     
     /// Nombre de jours pendant lesquels conserver l'historique
     @Published var historyRetentionDays: Int {
         didSet {
-            save(.historyRetentionDays, value: historyRetentionDays)
+            save(PreferenceKey.historyRetentionDays.rawValue, value: historyRetentionDays)
         }
     }
     
     /// Indique si le mode manuel est activé (plutôt que la détection automatique)
     @Published var useManualMode: Bool {
         didSet {
-            save(.useManualMode, value: useManualMode)
+            save(PreferenceKey.useManualMode.rawValue, value: useManualMode)
         }
     }
     
     /// Taille de police pour l'interface
     @Published var fontSize: Int {
         didSet {
-            save(.fontSize, value: fontSize)
+            save(PreferenceKey.fontSize.rawValue, value: fontSize)
         }
     }
     
     /// Indique si le mode sombre est activé
     @Published var useDarkMode: Bool {
         didSet {
-            save(.useDarkMode, value: useDarkMode)
+            save(PreferenceKey.useDarkMode.rawValue, value: useDarkMode)
         }
     }
     
@@ -88,14 +89,14 @@ class PreferencesManager: ObservableObject {
     
     init() {
         // Chargement des préférences avec valeurs par défaut
-        self.silenceThreshold = UserDefaults.standard.float(forKey: PreferenceKeys.silenceThreshold, defaultValue: 0.1)
-        self.silenceDuration = UserDefaults.standard.double(forKey: PreferenceKeys.silenceDuration, defaultValue: 1.5)
-        self.outputVolume = UserDefaults.standard.float(forKey: PreferenceKeys.outputVolume, defaultValue: 0.8)
-        self.saveHistory = UserDefaults.standard.bool(forKey: PreferenceKeys.saveHistory, defaultValue: true)
-        self.historyRetentionDays = UserDefaults.standard.integer(forKey: PreferenceKeys.historyRetentionDays, defaultValue: 30)
-        self.useManualMode = UserDefaults.standard.bool(forKey: PreferenceKeys.useManualMode, defaultValue: false)
-        self.fontSize = UserDefaults.standard.integer(forKey: PreferenceKeys.fontSize, defaultValue: 14)
-        self.useDarkMode = UserDefaults.standard.bool(forKey: PreferenceKeys.useDarkMode, defaultValue: false)
+        self.silenceThreshold = UserDefaults.standard.float(forKey: PreferenceKey.silenceThreshold.rawValue, defaultValue: 0.1)
+        self.silenceDuration = UserDefaults.standard.double(forKey: PreferenceKey.silenceDuration.rawValue, defaultValue: 1.5)
+        self.outputVolume = UserDefaults.standard.float(forKey: PreferenceKey.outputVolume.rawValue, defaultValue: 0.8)
+        self.saveHistory = UserDefaults.standard.bool(forKey: PreferenceKey.saveHistory.rawValue, defaultValue: true)
+        self.historyRetentionDays = UserDefaults.standard.integer(forKey: PreferenceKey.historyRetentionDays.rawValue, defaultValue: 30)
+        self.useManualMode = UserDefaults.standard.bool(forKey: PreferenceKey.useManualMode.rawValue, defaultValue: false)
+        self.fontSize = UserDefaults.standard.integer(forKey: PreferenceKey.fontSize.rawValue, defaultValue: 14)
+        self.useDarkMode = UserDefaults.standard.bool(forKey: PreferenceKey.useDarkMode.rawValue, defaultValue: false)
     }
     
     // MARK: - Méthodes de sauvegarde
