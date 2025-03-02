@@ -21,12 +21,27 @@ class SpeechRecognitionService: ObservableObject {
     }
     
     /// États possibles du service
-    enum RecognitionState {
+    enum RecognitionState: Equatable {
         case idle
         case initializing
         case recording
         case recognizing
-        case failed(Error)
+        case failed(String) // Utilise String au lieu de Error pour permettre la conformité à Equatable
+        
+        // Implémentation manuelle de '==' pour les types avec valeurs associées
+        static func == (lhs: RecognitionState, rhs: RecognitionState) -> Bool {
+            switch (lhs, rhs) {
+            case (.idle, .idle),
+                 (.initializing, .initializing),
+                 (.recording, .recording),
+                 (.recognizing, .recognizing):
+                return true
+            case (.failed(let lhsError), .failed(let rhsError)):
+                return lhsError == rhsError
+            default:
+                return false
+            }
+        }
     }
     
     // MARK: - Propriétés publiées
@@ -80,7 +95,7 @@ class SpeechRecognitionService: ObservableObject {
     /// Configure le service avec un modèle spécifique
     func configure(model: ModelInfo?) {
         guard let model = model, model.type == .speech else {
-            state = .failed(NSError(domain: "SpeechRecognition", code: 1, userInfo: [NSLocalizedDescriptionKey: "Modèle de reconnaissance vocale non valide"]))
+            state = .failed("Modèle de reconnaissance vocale non valide")
             return
         }
         
@@ -109,7 +124,7 @@ class SpeechRecognitionService: ObservableObject {
             state = .recording
             isActive = true
         } catch {
-            state = .failed(error)
+            state = .failed(error.localizedDescription)
             isActive = false
         }
     }
